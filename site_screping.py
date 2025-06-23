@@ -113,4 +113,4 @@ try:
 
     print("সব তথ্য books.csv ফাইলে সেভ হয়েছে!")
 except Exception as err:
-    print("Has same erro", err)
+    print("Has some error", err)
