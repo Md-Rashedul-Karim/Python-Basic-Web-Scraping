@@ -29,7 +29,7 @@ try:
 
     # BeautifulSoup দিয়ে HTML পার্স করি
     soup = BeautifulSoup(response.text, "html.parser")
-
+    time.sleep(random.uniform(1, 5))
 
     # সব বইয়ের তথ্য খুঁজে বের করি
     books = soup.find_all("article", class_="product_pod")
@@ -94,12 +94,17 @@ try:
                 image_path = img_tag["src"] if img_tag else "N/A"
                 full_image_url = base_url + image_path if image_path != "N/A" else "N/A"
 
+                # বই এর রেটিং
+                # rating_classes = book.find('p', class_='star-rating')['class']
+                # rating = rating_classes[1]  # 'One', 'Two', 'Three', 'Four', 'Five'
+
                 # Rating
-                rating_tag = image_container.find("p", class_="star-rating")
+                rating_tag = book.find("p", class_="star-rating")
+
                 if rating_tag:
                     try:
                         rating_class = rating_tag["class"][1]  # "One", "Two", ইত্যাদি
-                        rating_dict = {"One": 1, "Two": 2, "Three": 3, "Four": 4, "Five": 5}
+                        rating_dict = {"One": "One", "Two": "Two", "Three": "Three", "Four": "Four", "Five": "Five"}
                         rating = rating_dict.get(rating_class, "N/A")
                     except (KeyError, IndexError):
                         rating = "N/A"
